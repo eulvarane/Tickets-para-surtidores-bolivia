@@ -27,9 +27,15 @@
         }
         .image-section {
             flex: 1;
-            background-image: url('206-1312041336.jpg');
-            background-size: cover;
-            background-position: center;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background-color: #f4f4f4; /* Fallback color */
+        }
+        .image-section img {
+            max-width: 100%;
+            max-height: 100%;
+            object-fit: contain;
         }
         .text-section {
             flex: 1;
@@ -64,7 +70,9 @@
 </head>
 <body>
     <div class="container">
-        <div class="image-section"></div>
+        <div class="image-section">
+            <img src="background.jpg" alt="Background Image">
+        </div>
         <div class="text-section">
             <h1>Reserve a spot in the gas station of your convenience!<br>Click the link below to be redirected and get your ticket now!:</h1>
             <a href="https://docs.google.com/forms/d/e/1FAIpQLSd2FtfpS66l45i4RmwlDwdsR8Hhy9P3oJo7wTSQbACdr72yDA/viewform?usp=sf_link" target="_blank">Go to Google form</a>
