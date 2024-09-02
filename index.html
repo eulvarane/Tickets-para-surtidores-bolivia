@@ -3,100 +3,37 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Redirect Link</title>
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap">
+    <title>Questionnaire</title>
     <style>
-        body {
-            font-family: 'Roboto', sans-serif;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
-            margin: 0;
-            background-color: #f4f4f4;
-        }
-        .container {
-            display: flex;
-            flex-direction: row;
-            width: 80%;
-            max-width: 1200px;
-            height: 500px;
-            background-color: white;
-            border-radius: 12px;
-            box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
-            overflow: hidden;
-        }
-        .image-section, .text-section {
-            flex: 1;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            padding: 20px;
-        }
-        .image-section img {
-            max-width: 100%;
-            max-height: 100%;
-            object-fit: contain;
-        }
-        .text-section {
-            flex-direction: column;
-            background-color: rgba(255, 255, 255, 0.9);
-        }
-        h1 {
-            color: #333;
-            font-weight: 500;
-            margin-bottom: 20px;
-            text-align: center;
-        }
-        a {
-            display: inline-block;
-            margin-top: 20px;
-            padding: 12px 24px;
-            color: white;
-            background-color: #28a745;
-            text-decoration: none;
-            border-radius: 6px;
-            font-weight: 500;
-            transition: background-color 0.3s ease;
-        }
-        a:hover {
-            background-color: #218838;
-        }
-
-        /* Responsive Design */
-        @media (max-width: 768px) {
-            .container {
-                flex-direction: column;
-                width: 90%;
-                height: auto;
-            }
-            .image-section {
-                order: 2;
-                padding: 10px;
-            }
-            .text-section {
-                order: 1;
-                padding: 20px;
-            }
-            h1 {
-                font-size: 1.2em;
-            }
-            a {
-                padding: 10px 20px;
-                font-size: 1em;
-            }
-        }
+        .hidden { display: none; }
+        /* Add any additional styling here */
     </style>
 </head>
 <body>
-    <div class="container">
-        <div class="image-section">
-            <img src="206-1312041336.jpg" alt="Background Image">
+    <h1>Questionnaire</h1>
+    <form id="questionnaire-form">
+        <label for="selection">Select an option:</label>
+        <select id="selection" name="selection">
+            <option value="">--Please choose an option--</option>
+            <option value="carga-vehiculo">Carga por en vehiculo</option>
+            <option value="carga-bidon">Carga en bidon</option>
+        </select>
+
+        <div id="carga-vehiculo" class="hidden">
+            <label for="vehiculoQuestion1">Question for vehiculo 1:</label>
+            <input type="text" id="vehiculoQuestion1" name="vehiculoQuestion1">
+            <!-- Add more questions as needed -->
         </div>
-        <div class="text-section">
-            <h1>Reserve a spot in the gas station of your convenience!<br>Click the link below to be redirected and get your ticket now!:</h1>
-            <a href="https://docs.google.com/forms/d/e/1FAIpQLSd2FtfpS66l45i4RmwlDwdsR8Hhy9P3oJo7wTSQbACdr72yDA/viewform?usp=sf_link" target="_blank">Go to Google form</a>
+
+        <div id="carga-bidon" class="hidden">
+            <label for="bidonQuestion1">Question for bidon 1:</label>
+            <input type="text" id="bidonQuestion1" name="bidonQuestion1">
+            <!-- Add more questions as needed -->
         </div>
-    </div>
+
+        <button type="submit">Submit</button>
+    </form>
+
+    <script src="script.js"></script>
 </body>
 </html>
