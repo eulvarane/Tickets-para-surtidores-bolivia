@@ -8,42 +8,40 @@
 </head>
 <body>
     <div class="container">
-        <div class="image-section">
-            <img src="206-1312041336.jpg" alt="Background Image">
-        </div>
-        <div class="form-section">
-            <h1>Questionnaire</h1>
+        <img src="206-1312041336.jpg" alt="Image" class="left-image">
+        <div class="form-container">
             <form id="questionnaire-form">
-                <label for="selection">Select an option:</label>
-                <select id="selection" name="selection">
-                    <option value="">--Please choose an option--</option>
-                    <option value="carga-vehiculo">Carga por en vehiculo</option>
-                    <option value="carga-bidon">Carga en bidon</option>
+                <label for="selection">Select Type:</label>
+                <select id="selection">
+                    <option value="">Select an option</option>
+                    <option value="carga-vehiculo">Carga por Vehiculo</option>
+                    <option value="carga-bidon">Carga en Bidon</option>
                 </select>
 
-                <div id="carga-vehiculo" class="hidden">
+                <div id="carga-vehiculo" class="form-section hidden">
+                    <h3>Carga por Vehiculo</h3>
                     <label for="nombre">Nombre:</label>
-                    <input type="text" id="nombre" name="nombre">
-
+                    <input type="text" id="nombre" name="nombre" required>
+                    
                     <label for="apellido">Apellido:</label>
-                    <input type="text" id="apellido" name="apellido">
-
-                    <label for="celular">Numero de celular (no incluir +591):</label>
-                    <input type="text" id="celular" name="celular">
-
-                    <label for="placa">Placa de vehiculo:</label>
-                    <input type="text" id="placa" name="placa">
-
-                    <label for="combustible">Tipo de combustible:</label>
-                    <select id="combustible" name="combustible">
+                    <input type="text" id="apellido" name="apellido" required>
+                    
+                    <label for="numero-celular">Numero de celular:</label>
+                    <input type="text" id="numero-celular" name="numero-celular" required>
+                    
+                    <label for="placa-vehiculo">Placa de Vehiculo:</label>
+                    <input type="text" id="placa-vehiculo" name="placa-vehiculo" required>
+                    
+                    <label for="tipo-combustible">Tipo de Combustible:</label>
+                    <select id="tipo-combustible" name="tipo-combustible" required>
                         <option value="gasolina">Gasolina</option>
                         <option value="diesel">Diesel</option>
                         <option value="gas">Gas</option>
                     </select>
-
+                    
                     <label for="departamento">Departamento:</label>
-                    <select id="departamento" name="departamento">
-                        <option value="">--Select Departamento--</option>
+                    <select id="departamento" name="departamento" required>
+                        <option value="">Select Departamento</option>
                         <option value="la-paz">La Paz</option>
                         <option value="oruro">Oruro</option>
                         <option value="potosi">Potosí</option>
@@ -54,26 +52,27 @@
                         <option value="cochabamba">Cochabamba</option>
                         <option value="chuquisaca">Chuquisaca</option>
                     </select>
-
+                    
                     <label for="ciudad">Ciudad:</label>
-                    <select id="ciudad" name="ciudad">
-                        <!-- Options will be populated based on Departamento selection -->
+                    <select id="ciudad" name="ciudad" required>
+                        <option value="">Select Ciudad</option>
                     </select>
-
+                    
                     <label for="surtidor">Surtidor de su preferencia:</label>
-                    <input type="text" id="surtidor" name="surtidor">
-
-                    <label for="terminos">
-                        <input type="checkbox" id="terminos" name="terminos">
-                        Acepto los términos y condiciones
+                    <input type="text" id="surtidor" name="surtidor" required>
+                    
+                    <label>
+                        <input type="checkbox" id="terminos" name="terminos" required>
+                        Terminos y condiciones
                     </label>
-
-                    <button type="submit">Submit</button>
                 </div>
 
-                <div id="carga-bidon" class="hidden">
-                    <!-- Include your fields for "carga en bidon" here -->
+                <div id="carga-bidon" class="form-section hidden">
+                    <h3>Carga en Bidon</h3>
+                    <!-- Add questions for "Carga en Bidon" here -->
                 </div>
+
+                <button type="submit">Submit</button>
             </form>
         </div>
     </div>
