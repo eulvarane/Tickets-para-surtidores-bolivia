@@ -18,6 +18,7 @@ document.addEventListener('DOMContentLoaded', () => {
         'chuquisaca': ['Sucre', 'Yamparaez', 'Monteagudo'],
     };
 
+    // Show or hide the appropriate form sections based on selection
     selection.addEventListener('change', (event) => {
         const value = event.target.value;
         vehiculoDiv.classList.add('hidden');
@@ -30,6 +31,7 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     });
 
+    // Populate city options based on selected departamento
     departamentoSelect.addEventListener('change', (event) => {
         const departamento = event.target.value;
         const citiesList = cities[departamento] || [];
@@ -40,12 +42,13 @@ document.addEventListener('DOMContentLoaded', () => {
         // Populate new options
         citiesList.forEach(city => {
             const option = document.createElement('option');
-            option.value = city.toLowerCase().replace(/\s+/g, '-'); // convert to a suitable value
+            option.value = city.toLowerCase().replace(/\s+/g, '-'); // Convert to a suitable value
             option.textContent = city;
             ciudadSelect.appendChild(option);
         });
     });
 
+    // Handle form submission
     document.getElementById('questionnaire-form').addEventListener('submit', async (event) => {
         event.preventDefault();
         const formData = new FormData(event.target);
@@ -56,7 +59,7 @@ document.addEventListener('DOMContentLoaded', () => {
         });
 
         try {
-            const response = await fetch('https://YOUR_CLOUD_FUNCTION_URL', {
+            const response = await fetch('https://YOUR_CLOUD_FUNCTION_URL/submitForm', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
@@ -75,3 +78,4 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     });
 });
+
