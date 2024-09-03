@@ -3,19 +3,30 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Questionnaire</title>
+    <title>Questionaire</title>
     <link rel="stylesheet" href="styles.css">
 </head>
+  
 <body>
+  
+    <header>
+        <h1>Agenda tu carga de combustible aqui!</h1>
+        <h2>Subtitle goes here</h2>
+    </header>
+  
     <div class="container">
+      
         <div class="image-container">
             <img src="206-1312041336.jpg" alt="Left Image">
         </div>
+      
         <div class="form-container">
+          
             <form id="questionnaire-form">
-                <label for="selection">Select Type:</label>
+                
+              <label for="selection">Seleccione el metodo de carga:</label>
                 <select id="selection">
-                    <option value="">Select an option</option>
+                    <option value="">Seleccionar una opcion</option>
                     <option value="carga-vehiculo">Carga por Vehiculo</option>
                     <option value="carga-bidon">Carga en Bidon</option>
                 </select>
@@ -36,6 +47,7 @@
                     
                     <label for="tipo-combustible">Tipo de Combustible:</label>
                     <select id="tipo-combustible" name="tipo-combustible" required>
+                        <option value="">Seleccionar combustible</option>
                         <option value="gasolina">Gasolina</option>
                         <option value="diesel">Diesel</option>
                         <option value="gas">Gas</option>
@@ -43,7 +55,7 @@
                     
                     <label for="departamento">Departamento:</label>
                     <select id="departamento" name="departamento" required>
-                        <option value="">Select Departamento</option>
+                        <option value="">Seleccione Departamento</option>
                         <option value="la-paz">La Paz</option>
                         <option value="oruro">Oruro</option>
                         <option value="potosi">Potosí</option>
@@ -57,18 +69,21 @@
                     
                     <label for="ciudad">Ciudad:</label>
                     <select id="ciudad" name="ciudad" required>
-                        <option value="">Select Ciudad</option>
+                        <option value="">Seleccione Ciudad</option>
                     </select>
                     
                     <label for="surtidor">Surtidor de su preferencia:</label>
-                    <input type="text" id="surtidor" name="surtidor" required>
+                    <select id="surtidor" name="surtidor" required>
+                        <option value="">Seleccione un surtidor</option>
+                    </select>
                     
                     <label>
-                        <input type="checkbox" id="terminos" name="terminos" required>
                         Terminos y condiciones
+                        <input type="checkbox" id="terminos" name="terminos" required>
                     </label>
                 </div>
 
+              
                 <div id="carga-bidon" class="form-section hidden">
                     <h3>Carga en Bidon</h3>
                     <!-- Add questions for "Carga en Bidon" here -->
