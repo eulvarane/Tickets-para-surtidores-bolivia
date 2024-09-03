@@ -5,6 +5,9 @@ document.addEventListener('DOMContentLoaded', () => {
     const departamentoSelect = document.getElementById('departamento');
     const ciudadSelect = document.getElementById('ciudad');
     const form = document.getElementById('questionnaire-form');
+    const submitButton = form.querySelector('button[type="submit"]');
+    
+    const requiredFields = ['nombre', 'apellido', 'numero-celular', 'placa-vehiculo', 'tipo-combustible', 'departamento', 'ciudad', 'surtidor'];
 
     // Define the cities for each departamento
     const cities = {
@@ -30,6 +33,8 @@ document.addEventListener('DOMContentLoaded', () => {
         } else if (value === 'carga-bidon') {
             bidonDiv.classList.remove('hidden');
         }
+
+        checkFormValidity(); // Check validity whenever the form section changes
     });
 
     // Populate city options based on selected departamento
@@ -47,44 +52,36 @@ document.addEventListener('DOMContentLoaded', () => {
             option.textContent = city;
             ciudadSelect.appendChild(option);
         });
+
+        checkFormValidity(); // Check validity whenever the city changes
+    });
+
+    // Disable/Enable submit button based on form validity
+    const checkFormValidity = () => {
+        let isValid = true;
+
+        requiredFields.forEach(id => {
+            const field = document.getElementById(id);
+            if (field && !field.value.trim()) {
+                isValid = false;
+            }
+        });
+
+        submitButton.disabled = !isValid; // Disable button if any required field is empty
+    };
+
+    // Attach keyup/change event listeners to required fields
+    requiredFields.forEach(id => {
+        const field = document.getElementById(id);
+        if (field) {
+            field.addEventListener('keyup', checkFormValidity);
+            field.addEventListener('change', checkFormValidity);
+        }
     });
 
     // Validate form before submission
     form.addEventListener('submit', async (event) => {
         event.preventDefault();
-
-        // Clear previous error messages
-        let isValid = true;
-        const errorMessages = [];
-
-        // Check if all required fields are filled
-        const requiredFields = ['nombre', 'apellido', 'numero-celular', 'placa-vehiculo', 'tipo-combustible', 'departamento', 'ciudad', 'surtidor'];
-        requiredFields.forEach(id => {
-            const field = document.getElementById(id);
-            if (!field.value.trim()) {
-                isValid = false;
-                errorMessages.push(`Please fill in the ${field.previousElementSibling.textContent}`);
-            }
-        });
-
-        // Validate phone number to be numeric
-        const phoneField = document.getElementById('numero-celular');
-        if (!/^\d+$/.test(phoneField.value)) {
-            isValid = false;
-            errorMessages.push('Please enter a valid numeric phone number.');
-        }
-
-        // Check if terms and conditions are accepted
-        const termsCheckbox = document.getElementById('terminos');
-        if (!termsCheckbox.checked) {
-            isValid = false;
-            errorMessages.push('You must accept the terms and conditions.');
-        }
-
-        if (!isValid) {
-            alert(errorMessages.join('\n'));
-            return;
-        }
 
         // Prepare form data for submission
         const formData = new FormData(form);
