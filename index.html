@@ -22,18 +22,58 @@
                 </select>
 
                 <div id="carga-vehiculo" class="hidden">
-                    <label for="vehiculoQuestion1">Question for vehiculo 1:</label>
-                    <input type="text" id="vehiculoQuestion1" name="vehiculoQuestion1">
-                    <!-- Add more questions as needed -->
+                    <label for="nombre">Nombre:</label>
+                    <input type="text" id="nombre" name="nombre">
+
+                    <label for="apellido">Apellido:</label>
+                    <input type="text" id="apellido" name="apellido">
+
+                    <label for="celular">Numero de celular (no incluir +591):</label>
+                    <input type="text" id="celular" name="celular">
+
+                    <label for="placa">Placa de vehiculo:</label>
+                    <input type="text" id="placa" name="placa">
+
+                    <label for="combustible">Tipo de combustible:</label>
+                    <select id="combustible" name="combustible">
+                        <option value="gasolina">Gasolina</option>
+                        <option value="diesel">Diesel</option>
+                        <option value="gas">Gas</option>
+                    </select>
+
+                    <label for="departamento">Departamento:</label>
+                    <select id="departamento" name="departamento">
+                        <option value="">--Select Departamento--</option>
+                        <option value="la-paz">La Paz</option>
+                        <option value="oruro">Oruro</option>
+                        <option value="potosi">Potosí</option>
+                        <option value="pando">Pando</option>
+                        <option value="santa-cruz">Santa Cruz</option>
+                        <option value="tarija">Tarija</option>
+                        <option value="beni">Beni</option>
+                        <option value="cochabamba">Cochabamba</option>
+                        <option value="chuquisaca">Chuquisaca</option>
+                    </select>
+
+                    <label for="ciudad">Ciudad:</label>
+                    <select id="ciudad" name="ciudad">
+                        <!-- Options will be populated based on Departamento selection -->
+                    </select>
+
+                    <label for="surtidor">Surtidor de su preferencia:</label>
+                    <input type="text" id="surtidor" name="surtidor">
+
+                    <label for="terminos">
+                        <input type="checkbox" id="terminos" name="terminos">
+                        Acepto los términos y condiciones
+                    </label>
+
+                    <button type="submit">Submit</button>
                 </div>
 
                 <div id="carga-bidon" class="hidden">
-                    <label for="bidonQuestion1">Question for bidon 1:</label>
-                    <input type="text" id="bidonQuestion1" name="bidonQuestion1">
-                    <!-- Add more questions as needed -->
+                    <!-- Include your fields for "carga en bidon" here -->
                 </div>
-
-                <button type="submit">Submit</button>
             </form>
         </div>
     </div>
