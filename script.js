@@ -2,6 +2,21 @@ document.addEventListener('DOMContentLoaded', () => {
     const selection = document.getElementById('selection');
     const vehiculoDiv = document.getElementById('carga-vehiculo');
     const bidonDiv = document.getElementById('carga-bidon');
+    const departamentoSelect = document.getElementById('departamento');
+    const ciudadSelect = document.getElementById('ciudad');
+
+    // Define the cities for each departamento
+    const cities = {
+        'la-paz': ['La Paz', 'El Alto', 'Viacha'],
+        'oruro': ['Oruro', 'Huanuni', 'Cochabamba'],
+        'potosi': ['Potosí', 'Uyuni', 'Villazón'],
+        'pando': ['Cobija', 'Bella Vista', 'Bolívar'],
+        'santa-cruz': ['Santa Cruz', 'Warnes', 'Montero'],
+        'tarija': ['Tarija', 'Villamontes', 'Yacuiba'],
+        'beni': ['Trinidad', 'Riberalta', 'Guayaramerín'],
+        'cochabamba': ['Cochabamba', 'Quillacollo', 'Sacaba'],
+        'chuquisaca': ['Sucre', 'Yamparaez', 'Monteagudo'],
+    };
 
     selection.addEventListener('change', (event) => {
         const value = event.target.value;
@@ -13,6 +28,22 @@ document.addEventListener('DOMContentLoaded', () => {
         } else if (value === 'carga-bidon') {
             bidonDiv.classList.remove('hidden');
         }
+    });
+
+    departamentoSelect.addEventListener('change', (event) => {
+        const departamento = event.target.value;
+        const citiesList = cities[departamento] || [];
+        
+        // Clear existing options
+        ciudadSelect.innerHTML = '';
+
+        // Populate new options
+        citiesList.forEach(city => {
+            const option = document.createElement('option');
+            option.value = city.toLowerCase().replace(/\s+/g, '-'); // convert to a suitable value
+            option.textContent = city;
+            ciudadSelect.appendChild(option);
+        });
     });
 
     document.getElementById('questionnaire-form').addEventListener('submit', async (event) => {
