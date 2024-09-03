@@ -7,15 +7,15 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Define the cities for each departamento
     const cities = {
-        'la-paz': ['La Paz', 'El Alto', 'Viacha'],
-        'oruro': ['Oruro', 'Huanuni', 'Cochabamba'],
-        'potosi': ['Potosí', 'Uyuni', 'Villazón'],
+        'La Paz': ['La Paz', 'El Alto', 'Viacha'],
+        'Oruro': ['Oruro', 'Huanuni', 'Cochabamba'],
+        'Potosi': ['Potosí', 'Uyuni', 'Villazón'],
         'pando': ['Cobija', 'Bella Vista', 'Bolívar'],
-        'santa-cruz': ['Santa Cruz', 'Warnes', 'Montero'],
-        'tarija': ['Tarija', 'Villamontes', 'Yacuiba'],
-        'beni': ['Trinidad', 'Riberalta', 'Guayaramerín'],
-        'cochabamba': ['Cochabamba', 'Quillacollo', 'Sacaba'],
-        'chuquisaca': ['Sucre', 'Yamparaez', 'Monteagudo'],
+        'Santa Cruz': ['Santa Cruz', 'Warnes', 'Montero'],
+        'Tarija': ['Tarija', 'Villamontes', 'Yacuiba'],
+        'Beni': ['Trinidad', 'Riberalta', 'Guayaramerín'],
+        'Cochabamba': ['Cochabamba', 'Quillacollo', 'Sacaba'],
+        'Chuquisaca': ['Sucre', 'Yamparaez', 'Monteagudo'],
     };
 
     // Show or hide the appropriate form sections based on selection
