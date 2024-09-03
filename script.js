@@ -1,116 +1,74 @@
-document.addEventListener('DOMContentLoaded', () => {
-    const selection = document.getElementById('selection');
-    const vehiculoDiv = document.getElementById('carga-vehiculo');
-    const bidonDiv = document.getElementById('carga-bidon');
-    const departamentoSelect = document.getElementById('departamento');
-    const ciudadSelect = document.getElementById('ciudad');
-    const form = document.getElementById('questionnaire-form');
+document.addEventListener("DOMContentLoaded", function() {
+    const departamentoSelect = document.getElementById("departamento");
+    const ciudadSelect = document.getElementById("ciudad");
+    const submitButton = document.getElementById("submitButton");
 
-    // Define the cities for each departamento
+    // Populate city dropdown based on selected department
     const cities = {
-        'la-paz': ['La Paz', 'El Alto', 'Viacha'],
-        'oruro': ['Oruro', 'Huanuni', 'Cochabamba'],
-        'potosi': ['Potosí', 'Uyuni', 'Villazón'],
-        'pando': ['Cobija', 'Bella Vista', 'Bolívar'],
-        'santa-cruz': ['Santa Cruz', 'Warnes', 'Montero'],
-        'tarija': ['Tarija', 'Villamontes', 'Yacuiba'],
-        'beni': ['Trinidad', 'Riberalta', 'Guayaramerín'],
-        'cochabamba': ['Cochabamba', 'Quillacollo', 'Sacaba'],
-        'chuquisaca': ['Sucre', 'Yamparaez', 'Monteagudo'],
+        "la paz": ["La Paz", "El Alto", "Viacha"],
+        "oruro": ["Oruro"],
+        "potosi": ["Potosí", "Uyuni"],
+        "pando": ["Cobija"],
+        "santa cruz": ["Santa Cruz de la Sierra", "Montero"],
+        "tarija": ["Tarija"],
+        "beni": ["Trinidad", "Riberalta"],
+        "cochabamba": ["Cochabamba", "Sacaba"],
+        "chuquisaca": ["Sucre"]
     };
 
-    // Show or hide the appropriate form sections based on selection
-    selection.addEventListener('change', (event) => {
-        const value = event.target.value;
-        vehiculoDiv.classList.add('hidden');
-        bidonDiv.classList.add('hidden');
+    departamentoSelect.addEventListener("change", function() {
+        const selectedDepartamento = departamentoSelect.value;
+        ciudadSelect.innerHTML = "";
 
-        if (value === 'carga-vehiculo') {
-            vehiculoDiv.classList.remove('hidden');
-        } else if (value === 'carga-bidon') {
-            bidonDiv.classList.remove('hidden');
-        }
-    });
-
-    // Populate city options based on selected departamento
-    departamentoSelect.addEventListener('change', (event) => {
-        const departamento = event.target.value;
-        const citiesList = cities[departamento] || [];
-        
-        // Clear existing options
-        ciudadSelect.innerHTML = '<option value="">Select Ciudad</option>';
-
-        // Populate new options
-        citiesList.forEach(city => {
-            const option = document.createElement('option');
-            option.value = city.toLowerCase().replace(/\s+/g, '-'); // Convert to a suitable value
-            option.textContent = city;
-            ciudadSelect.appendChild(option);
-        });
-    });
-
-    // Validate form before submission
-    form.addEventListener('submit', async (event) => {
-        event.preventDefault();
-
-        // Clear previous error messages
-        let isValid = true;
-        const errorMessages = [];
-
-        // Check if all required fields are filled
-        const requiredFields = ['nombre', 'apellido', 'numero-celular', 'placa-vehiculo', 'tipo-combustible', 'departamento', 'ciudad', 'surtidor'];
-        requiredFields.forEach(id => {
-            const field = document.getElementById(id);
-            if (!field.value.trim()) {
-                isValid = false;
-                errorMessages.push(`Please fill in the ${field.previousElementSibling.textContent}`);
-            }
-        });
-
-        // Validate phone number to be numeric
-        const phoneField = document.getElementById('numero-celular');
-        if (!/^\d+$/.test(phoneField.value)) {
-            isValid = false;
-            errorMessages.push('Please enter a valid numeric phone number.');
-        }
-
-        // Check if terms and conditions are accepted
-        const termsCheckbox = document.getElementById('terminos');
-        if (!termsCheckbox.checked) {
-            isValid = false;
-            errorMessages.push('You must accept the terms and conditions.');
-        }
-
-        if (!isValid) {
-            alert(errorMessages.join('\n'));
-            return;
-        }
-
-        // Prepare form data for submission
-        const formData = new FormData(form);
-        const data = {};
-        formData.forEach((value, key) => {
-            data[key] = value;
-        });
-
-        // Submit form data
-        try {
-            const response = await fetch('https://YOUR_CLOUD_FUNCTION_URL/submitForm', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify(data),
+        if (cities[selectedDepartamento]) {
+            cities[selectedDepartamento].forEach(function(city) {
+                const option = document.createElement("option");
+                option.value = city;
+                option.textContent = city;
+                ciudadSelect.appendChild(option);
             });
-
-            if (response.ok) {
-                alert('Form submitted successfully!');
-            } else {
-                alert('Failed to submit the form.');
-            }
-        } catch (error) {
-            console.error('Error:', error);
-            alert('An error occurred.');
         }
     });
+
+    // Form validation
+    const formElements = document.querySelectorAll("input[type='text'], select, input[type='checkbox']");
+    formElements.forEach(element => {
+        element.addEventListener("input", checkFormValidity);
+        element.addEventListener("change", checkFormValidity);
+    });
+
+    function checkFormValidity() {
+        let isValid = true;
+
+        // Validate text inputs
+        formElements.forEach(element => {
+            if (element.type === "text" && element.value.trim() === "") {
+                isValid = false;
+            }
+
+            // Validate numeric input for phone number
+            if (element.id === "celular" && isNaN(element.value.trim())) {
+                isValid = false;
+            }
+
+            // Validate checkbox
+            if (element.type === "checkbox" && !element.checked) {
+                isValid = false;
+            }
+        });
+
+        // Enable or disable the submit button
+        if (isValid) {
+            submitButton.disabled = false;
+            submitButton.style.opacity = "1";
+            submitButton.style.pointerEvents = "auto";
+        } else {
+            submitButton.disabled = true;
+            submitButton.style.opacity = "0.5";
+            submitButton.style.pointerEvents = "none";
+        }
+    }
+
+    // Initial check
+    checkFormValidity();
 });
