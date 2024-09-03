@@ -4,11 +4,17 @@ document.addEventListener('DOMContentLoaded', () => {
     const bidonDiv = document.getElementById('carga-bidon');
     const departamentoSelect = document.getElementById('departamento');
     const ciudadSelect = document.getElementById('ciudad');
+    const surtidorSelect = document.getElementById('surtidor');
     const form = document.getElementById('questionnaire-form');
     const submitButton = form.querySelector('button[type="submit"]');
     
     const requiredFields = ['nombre', 'apellido', 'numero-celular', 'placa-vehiculo', 'tipo-combustible', 'departamento', 'ciudad', 'surtidor'];
-
+  
+    const checkbox = document.getElementById('terminos'); // Replace with the actual checkbox ID
+    
+    // Disable the submit button on initial load
+    submitButton.disabled = true;
+  
     // Define the cities for each departamento
     const cities = {
         'la-paz': ['La Paz', 'El Alto', 'Viacha'],
@@ -21,7 +27,22 @@ document.addEventListener('DOMContentLoaded', () => {
         'cochabamba': ['Cochabamba', 'Quillacollo', 'Sacaba'],
         'chuquisaca': ['Sucre', 'Yamparaez', 'Monteagudo'],
     };
-
+    
+  // Define the surtidores for each departamento and ciudad combination
+    const surtidores = {
+        'la-paz': {
+            'la-paz': ['Surtidor 1', 'Surtidor 2'],
+            'el-alto': ['Surtidor 3', 'Surtidor 4'],
+            'viacha': ['Surtidor 5'],
+        },
+        'oruro': {
+            'oruro': ['Surtidor 6', 'Surtidor 7'],
+            'huanuni': ['Surtidor 8'],
+            'cochabamba': ['Surtidor 9'], // Note: Cochabamba as a city in Oruro department
+        },
+        // Add other departamento and ciudad combinations with their respective surtidores here
+    };
+  
     // Show or hide the appropriate form sections based on selection
     selection.addEventListener('change', (event) => {
         const value = event.target.value;
@@ -32,6 +53,7 @@ document.addEventListener('DOMContentLoaded', () => {
             vehiculoDiv.classList.remove('hidden');
         } else if (value === 'carga-bidon') {
             bidonDiv.classList.remove('hidden');
+            surtidorSelect.innerHTML = '<option value="">Seleccione un surtidor</option>';
         }
 
         checkFormValidity(); // Check validity whenever the form section changes
@@ -52,23 +74,110 @@ document.addEventListener('DOMContentLoaded', () => {
             option.textContent = city;
             ciudadSelect.appendChild(option);
         });
-
+        // Clear the surtidor options as the ciudad has not been selected yet
+        surtidorSelect.innerHTML = '<option value="">Seleccione un surtidor</option>';
         checkFormValidity(); // Check validity whenever the city changes
     });
 
+    
+  // Populate surtidor options based on selected departamento and ciudad
+    ciudadSelect.addEventListener('change', (event) => {
+        const departamento = departamentoSelect.value;
+        const ciudad = event.target.value;
+        const surtidoresList = (surtidores[departamento] && surtidores[departamento][ciudad]) || [];
+        
+        // Clear existing options
+        surtidorSelect.innerHTML = '<option value="">Seleccione un surtidor</option>';
+
+        // Populate new options
+        surtidoresList.forEach(surtidor => {
+            const option = document.createElement('option');
+            option.value = surtidor.toLowerCase().replace(/\s+/g, '-'); // Convert to a suitable value
+            option.textContent = surtidor;
+            surtidorSelect.appendChild(option);
+        });
+
+        checkFormValidity(); // Check validity whenever the ciudad changes
+    });
+  
+  
     // Disable/Enable submit button based on form validity
+    
     const checkFormValidity = () => {
         let isValid = true;
 
         requiredFields.forEach(id => {
             const field = document.getElementById(id);
-            if (field && !field.value.trim()) {
-                isValid = false;
+
+            if (field) {
+                // Clear any previous validation messages
+                const errorSpan = document.getElementById(id + '-error');
+                if (errorSpan) {
+                    errorSpan.textContent = '';
+                }
+
+                // Check if field is empty
+                if (!field.value.trim()) {
+                    isValid = false;
+                }
+
+                // Check if 'numero de celular' is numeric
+                if (id === 'numero-celular' && isNaN(field.value.trim())) {
+                    isValid = false;
+                    field.setCustomValidity('Please enter a valid numeric value.');
+
+                    // Display the custom error message
+                    if (errorSpan) {
+                        errorSpan.textContent = 'Por favor ingrese un valor numérico válido.';
+                    }
+                } else if (id === 'numero-celular') {
+                    field.setCustomValidity(''); // Clear any previous validation message
+                }
             }
         });
 
-        submitButton.disabled = !isValid; // Disable button if any required field is empty
+        // Ensure the checkbox is checked
+        if (checkbox && !checkbox.checked) {
+            isValid = false;
+        }
+
+        submitButton.disabled = !isValid; // Disable button if any required field is empty or invalid
     };
+
+  // Add an event listener to validate numeric input for 'numero de celular'
+  document.getElementById('numero-celular').addEventListener('input', function() {
+      const errorSpan = document.getElementById('numero-celular-error');
+
+      if (isNaN(this.value.trim())) {
+          this.setCustomValidity('Please enter a valid numeric value.');
+
+          // Display the error message
+          if (errorSpan) {
+              errorSpan.textContent = 'Por favor ingrese un valor numérico válido.';
+          }
+      } else {
+          this.setCustomValidity('');
+
+          // Clear the error message
+          if (errorSpan) {
+              errorSpan.textContent = '';
+          }
+      }
+  });
+
+  
+  
+  
+
+    // Add an event listener to validate numeric input for 'numero de celular'
+    document.getElementById('numero-celular').addEventListener('input', function() {
+        if (isNaN(this.value.trim())) {
+            this.setCustomValidity('Please enter a valid numeric value.');
+        } else {
+            this.setCustomValidity('');
+        }
+    });
+
 
     // Attach keyup/change event listeners to required fields
     requiredFields.forEach(id => {
