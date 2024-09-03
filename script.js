@@ -4,6 +4,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const bidonDiv = document.getElementById('carga-bidon');
     const departamentoSelect = document.getElementById('departamento');
     const ciudadSelect = document.getElementById('ciudad');
+    const form = document.getElementById('questionnaire-form');
 
     // Define the cities for each departamento
     const cities = {
@@ -48,16 +49,51 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     });
 
-    // Handle form submission
-    document.getElementById('questionnaire-form').addEventListener('submit', async (event) => {
+    // Validate form before submission
+    form.addEventListener('submit', async (event) => {
         event.preventDefault();
-        const formData = new FormData(event.target);
-        const data = {};
 
+        // Clear previous error messages
+        let isValid = true;
+        const errorMessages = [];
+
+        // Check if all required fields are filled
+        const requiredFields = ['nombre', 'apellido', 'numero-celular', 'placa-vehiculo', 'tipo-combustible', 'departamento', 'ciudad', 'surtidor'];
+        requiredFields.forEach(id => {
+            const field = document.getElementById(id);
+            if (!field.value.trim()) {
+                isValid = false;
+                errorMessages.push(`Please fill in the ${field.previousElementSibling.textContent}`);
+            }
+        });
+
+        // Validate phone number to be numeric
+        const phoneField = document.getElementById('numero-celular');
+        if (!/^\d+$/.test(phoneField.value)) {
+            isValid = false;
+            errorMessages.push('Please enter a valid numeric phone number.');
+        }
+
+        // Check if terms and conditions are accepted
+        const termsCheckbox = document.getElementById('terminos');
+        if (!termsCheckbox.checked) {
+            isValid = false;
+            errorMessages.push('You must accept the terms and conditions.');
+        }
+
+        if (!isValid) {
+            alert(errorMessages.join('\n'));
+            return;
+        }
+
+        // Prepare form data for submission
+        const formData = new FormData(form);
+        const data = {};
         formData.forEach((value, key) => {
             data[key] = value;
         });
 
+        // Submit form data
         try {
             const response = await fetch('https://YOUR_CLOUD_FUNCTION_URL/submitForm', {
                 method: 'POST',
