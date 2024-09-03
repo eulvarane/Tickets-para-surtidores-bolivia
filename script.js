@@ -102,72 +102,26 @@ document.addEventListener('DOMContentLoaded', () => {
   
   
     // Disable/Enable submit button based on form validity
-    
     const checkFormValidity = () => {
         let isValid = true;
 
         requiredFields.forEach(id => {
             const field = document.getElementById(id);
+            if (field && !field.value.trim()) {
+                isValid = false;
+            }
 
-            if (field) {
-                // Clear any previous validation messages
-                const errorSpan = document.getElementById(id + '-error');
-                if (errorSpan) {
-                    errorSpan.textContent = '';
-                }
-
-                // Check if field is empty
-                if (!field.value.trim()) {
-                    isValid = false;
-                }
-
-                // Check if 'numero de celular' is numeric
-                if (id === 'numero-celular' && isNaN(field.value.trim())) {
-                    isValid = false;
-                    field.setCustomValidity('Please enter a valid numeric value.');
-
-                    // Display the custom error message
-                    if (errorSpan) {
-                        errorSpan.textContent = 'Por favor ingrese un valor numérico válido.';
-                    }
-                } else if (id === 'numero-celular') {
-                    field.setCustomValidity(''); // Clear any previous validation message
-                }
+            // Check if 'numero de celular' is numeric
+            if (id === 'numero-celular' && field && isNaN(field.value.trim())) {
+                isValid = false;
+                field.setCustomValidity('Please enter a valid numeric value.'); // Set custom validation message
+            } else if (id === 'numero-celular' && field) {
+                field.setCustomValidity(''); // Clear any previous validation message
             }
         });
 
-        // Ensure the checkbox is checked
-        if (checkbox && !checkbox.checked) {
-            isValid = false;
-        }
-
         submitButton.disabled = !isValid; // Disable button if any required field is empty or invalid
     };
-
-  // Add an event listener to validate numeric input for 'numero de celular'
-  document.getElementById('numero-celular').addEventListener('input', function() {
-      const errorSpan = document.getElementById('numero-celular-error');
-
-      if (isNaN(this.value.trim())) {
-          this.setCustomValidity('Please enter a valid numeric value.');
-
-          // Display the error message
-          if (errorSpan) {
-              errorSpan.textContent = 'Por favor ingrese un valor numérico válido.';
-          }
-      } else {
-          this.setCustomValidity('');
-
-          // Clear the error message
-          if (errorSpan) {
-              errorSpan.textContent = '';
-          }
-      }
-  });
-
-  
-  
-  
 
     // Add an event listener to validate numeric input for 'numero de celular'
     document.getElementById('numero-celular').addEventListener('input', function() {
