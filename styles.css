@@ -1,0 +1,77 @@
+/* Reset some default styles */
+body, h1, form {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* Set up the container with flexbox */
+.container {
+    display: flex;
+    height: 100vh; /* Full viewport height */
+}
+
+/* Style for the image section */
+.image-section {
+    flex: 1;
+    background-color: #f0f0f0; /* Light grey background for contrast */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+}
+
+.image-section img {
+    max-width: 100%;
+    height: auto;
+}
+
+/* Style for the form section */
+.form-section {
+    flex: 1;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+    background-color: #ffffff; /* White background for the form section */
+}
+
+h1 {
+    margin-bottom: 20px;
+}
+
+form {
+    width: 100%;
+    max-width: 600px; /* Limit the maximum width of the form */
+}
+
+label {
+    display: block;
+    margin-bottom: 8px;
+}
+
+input, select, button {
+    display: block;
+    width: 100%;
+    margin-bottom: 15px;
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+button {
+    background-color: #007BFF;
+    color: white;
+    border: none;
+    cursor: pointer;
+}
+
+button:hover {
+    background-color: #0056b3;
+}
+
+/* Hide elements initially */
+.hidden {
+    display: none;
+}
