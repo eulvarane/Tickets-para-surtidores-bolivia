@@ -3,10 +3,28 @@ body {
     margin: 0;
     padding: 0;
     display: flex;
+    flex-direction: column;
     justify-content: center;
     align-items: center;
     height: 100vh;
     background-color: #f7f7f7;
+}
+
+header {
+    text-align: center;
+    margin-bottom: 20px; /* Adjust the spacing between the header and the container */
+}
+
+h1 {
+    font-size: 2.5rem;
+    margin: 0;
+    color: #333;
+}
+
+h2 {
+    font-size: 1.5rem;
+    margin: 5px 0 20px 0;
+    color: #666;
 }
 
 .container {
@@ -15,7 +33,7 @@ body {
     width: 80%;
     max-width: 1200px;
     height: 80%;
-    border: 1px solid #ccc;
+    border: 2px solid #ccc;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     overflow: hidden;
 }
@@ -93,8 +111,19 @@ button:hover:enabled {
         height: auto;
         width: 90%;
     }
-
-    .image-container, .form-container {
+    
+  .form-container {
+      width: auto;
+      flex: 1;
+      padding: 20px;
+      background-color: #fff;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-start;
+      overflow-y: auto; /* Enable scrolling */
+    }
+  
+    .image-container {
         width: 100%;
         flex: none;
         height: auto;
@@ -117,7 +146,14 @@ button:hover:enabled {
     }
 
     .form-container {
-        padding: 10px;
+      width: auto;
+      flex: 1;
+      padding: 20px;
+      background-color: #fff;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-start;
+      overflow-y: auto; /* Enable scrolling */
     }
 
     input[type="text"], select {
