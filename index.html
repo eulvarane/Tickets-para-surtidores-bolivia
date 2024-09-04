@@ -1,98 +1,156 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
+
+  <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Questionaire</title>
     <link rel="stylesheet" href="styles.css">
-</head>
-  
-<body>
-  
+  </head>
+
+  <body>
+
     <header>
-        <h1>Agenda tu carga de combustible aqui!</h1>
-        <h2>Subtitle goes here</h2>
+      <h1>Bienvenido, agenda tu carga de combustible</h1>
+      <h2>Saca tu ticket electronico aqui y evita hacer cola en los surtidores</h2>
     </header>
-  
+
     <div class="container">
-      
-        <div class="image-container">
-            <img src="206-1312041336.jpg" alt="Left Image">
-        </div>
-      
-        <div class="form-container">
-          
-            <form id="questionnaire-form">
-                
-              <label for="selection">Seleccione el metodo de carga:</label>
-                <select id="selection">
-                    <option value="">Seleccionar una opcion</option>
-                    <option value="carga-vehiculo">Carga por Vehiculo</option>
-                    <option value="carga-bidon">Carga en Bidon</option>
-                </select>
 
-                <div id="carga-vehiculo" class="form-section hidden">
-                    <h3>Carga por Vehiculo</h3>
-                    <label for="nombre">Nombre:</label>
-                    <input type="text" id="nombre" name="nombre" required>
-                    
-                    <label for="apellido">Apellido:</label>
-                    <input type="text" id="apellido" name="apellido" required>
-                    
-                    <label for="numero-celular">Numero de celular:</label>
-                    <input type="text" id="numero-celular" name="numero-celular" required>
-                    
-                    <label for="placa-vehiculo">Placa de Vehiculo:</label>
-                    <input type="text" id="placa-vehiculo" name="placa-vehiculo" required>
-                    
-                    <label for="tipo-combustible">Tipo de Combustible:</label>
-                    <select id="tipo-combustible" name="tipo-combustible" required>
-                        <option value="">Seleccionar combustible</option>
-                        <option value="gasolina">Gasolina</option>
-                        <option value="diesel">Diesel</option>
-                        <option value="gas">Gas</option>
-                    </select>
-                    
-                    <label for="departamento">Departamento:</label>
-                    <select id="departamento" name="departamento" required>
-                        <option value="">Seleccione Departamento</option>
-                        <option value="la-paz">La Paz</option>
-                        <option value="oruro">Oruro</option>
-                        <option value="potosi">Potosí</option>
-                        <option value="pando">Pando</option>
-                        <option value="santa-cruz">Santa Cruz</option>
-                        <option value="tarija">Tarija</option>
-                        <option value="beni">Beni</option>
-                        <option value="cochabamba">Cochabamba</option>
-                        <option value="chuquisaca">Chuquisaca</option>
-                    </select>
-                    
-                    <label for="ciudad">Ciudad:</label>
-                    <select id="ciudad" name="ciudad" required>
-                        <option value="">Seleccione Ciudad</option>
-                    </select>
-                    
-                    <label for="surtidor">Surtidor de su preferencia:</label>
-                    <select id="surtidor" name="surtidor" required>
-                        <option value="">Seleccione un surtidor</option>
-                    </select>
-                    
-                    <label>
-                        Terminos y condiciones
-                        <input type="checkbox" id="terminos" name="terminos" required>
-                    </label>
-                </div>
+      <div class="image-container">
+        <img src="https://www.anh.gob.bo/w2019/public/images/anh_logo_color.png" alt="Left Image">
+      </div>
 
-              
-                <div id="carga-bidon" class="form-section hidden">
-                    <h3>Carga en Bidon</h3>
-                    <!-- Add questions for "Carga en Bidon" here -->
-                </div>
+      <div class="form-container">
 
-                <button type="submit">Submit</button>
-            </form>
-        </div>
+        <form id="questionnaire-form">
+
+          <label for="selection">Seleccione el metodo de carga:</label>
+          <select id="selection">
+            <option value="">Seleccionar una opcion</option>
+            <option value="carga-vehiculo">Carga por Vehiculo</option>
+            <option value="carga-bidon">Carga en Bidon</option>
+          </select>
+
+          <div id="carga-vehiculo" class="form-section hidden">
+            <h3>Carga por Vehiculo</h3>
+            <label for="nombre">Nombre:</label>
+            <input type="text" id="nombre" name="nombre" required>
+
+            <label for="apellido">Apellido:</label>
+            <input type="text" id="apellido" name="apellido" required>
+
+            <label for="numero-celular">Numero de celular:</label>
+            <input type="text" id="numero-celular" name="numero-celular" placeholder="77711111" pattern="[0-9]{3}[0-9]{5}" required> 
+
+            <label for="placa-vehiculo">Placa de Vehiculo:</label>
+            <input type="text" id="placa-vehiculo" name="placa-vehiculo" required>
+
+            <label for="tipo-combustible">Tipo de Combustible:</label>
+            <select id="tipo-combustible" name="tipo-combustible" required>
+              <option value="">Seleccionar combustible</option>
+              <option value="gasolina">Gasolina</option>
+              <option value="diesel">Diesel</option>
+              <option value="gas">Gas</option>
+            </select>
+
+            <label for="departamento">Departamento:</label>
+            <select id="departamento" name="departamento" required>
+              <option value="">Seleccione Departamento</option>
+              <option value="la-paz">La Paz</option>
+              <option value="oruro">Oruro</option>
+              <option value="potosi">Potosí</option>
+              <option value="pando">Pando</option>
+              <option value="santa-cruz">Santa Cruz</option>
+              <option value="tarija">Tarija</option>
+              <option value="beni">Beni</option>
+              <option value="cochabamba">Cochabamba</option>
+              <option value="chuquisaca">Chuquisaca</option>
+            </select>
+
+            <label for="ciudad">Ciudad:</label>
+            <select id="ciudad" name="ciudad" required>
+              <option value="">Seleccione Ciudad</option>
+            </select>
+
+            <label for="surtidor">Surtidor de su preferencia:</label>
+            <select id="surtidor" name="surtidor" required>
+              <option value="">Seleccione un surtidor</option>
+            </select>
+
+            <label>
+              Terminos y condiciones
+              <input type="checkbox" id="terminos" name="terminos" required>
+            </label>
+          </div>
+
+
+          <div id="carga-bidon" class="form-section hidden">
+            <h3>Carga en Bidon</h3>
+						
+            <label for="nombre">Nombre:</label>
+            <input type="text" id="nombre" name="nombre" required>
+
+            <label for="apellido">Apellido:</label>
+            <input type="text" id="apellido" name="apellido" required>
+
+            <label for="numero-celular">Numero de celular:</label>
+            <input type="text" id="numero-celular" name="numero-celular" placeholder="77711111" pattern="[0-9]{3}[0-9]{5}" required> 
+
+            <label for="documento-identidad">Carnet de indentidad:</label>
+            <input type="text" id="documento-identidad" name="documento-identidad" placeholder="1234567" pattern="[0-9]{7}" required>
+
+            <label for="tipo-combustibleBidon">Tipo de Combustible:</label>
+            <select id="tipo-combustibleBidon" name="tipo-combustibleBidon" required>
+              <option value="">Seleccionar combustible</option>
+              <option value="gasolina">Gasolina</option>
+              <option value="diesel">Diesel</option>
+              <option value="gas">Gas</option>
+            </select>
+
+            <label for="departamentoBidonBidon">Departamento:</label>
+            <select id="departamentoBidon" name="departamentoBidon" required>
+              <option value="">Seleccione Departamento</option>
+              <option value="la-paz">La Paz</option>
+              <option value="oruro">Oruro</option>
+              <option value="potosi">Potosí</option>
+              <option value="pando">Pando</option>
+              <option value="santa-cruz">Santa Cruz</option>
+              <option value="tarija">Tarija</option>
+              <option value="beni">Beni</option>
+              <option value="cochabamba">Cochabamba</option>
+              <option value="chuquisaca">Chuquisaca</option>
+            </select>
+
+            <label for="ciudadBidon">Ciudad:</label>
+            <select id="ciudadBidon" name="ciudadBidon" required>
+              <option value="">Seleccione Ciudad</option>
+            </select>
+
+            <label for="surtidorBidon">Surtidor de su preferencia:</label>
+            <select id="surtidorBidon" name="surtidorBidon" required>
+              <option value="">Seleccione un surtidor</option>
+            </select>
+
+            <label>
+              Terminos y condiciones
+              <input type="checkbox" id="terminosBidon" name="terminosBidon" required>
+            </label>
+						
+          </div>
+
+          <button type="submit">Submit</button>
+        </form>
+      </div>
     </div>
+		
+		<footer>
+
+				<h6>Terminos y condiciones: Este ticket no te garantiza la carga de combustible en caso de desabastecimiento. En dicho caso el ticket sera reprogramado manteniendo el orden previamente establecido en los tickets. El costo del ticket es de 2Bs. que debera ser pagado al momento de cargar gasolina.</h6>
+		
+		</footer>
+		
     <script src="script.js"></script>
-</body>
+  </body>
+
 </html>
