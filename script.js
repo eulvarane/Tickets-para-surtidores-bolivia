@@ -275,7 +275,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   });
 	
-/*
+
   // Validate form before submission
   form.addEventListener('submit', async (event) => {
     event.preventDefault();
@@ -306,5 +306,5 @@ document.addEventListener('DOMContentLoaded', () => {
       console.error('Error:', error);
       alert('An error occurred.');
     }
-  });*/
+  });
 });
